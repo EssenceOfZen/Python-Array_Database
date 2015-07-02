@@ -12,7 +12,7 @@ EoZ.EoZ_Logo()
 DATABASE = []
 DATABASENAME = ""
 DATE = time.strftime("%Y %b %d")
-
+VERSION = "1.0.5"
 
 # Initialize System ============================================
 if not os.path.exists("logs"): # if the logs folder doesn't exist make it
@@ -152,6 +152,10 @@ def getDate(): # Simply prints the date that was set at the beginning of the cod
     global DATE
     print(DATE)
 
+def getVersion():
+    global VERSION
+    print(VERSION)
+
 
 def main():
     # Creating variables
@@ -190,6 +194,8 @@ def main():
             edit()
         elif user_input == "date":
             getDate()
+        elif user_input == "version":
+            getVersion()
         elif user_input == "quit":
             switch = 0
 
