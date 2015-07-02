@@ -1,12 +1,26 @@
+# Array Database
+#   Made for learning and practicing and giving others something to mess around on.
 # Basic List(array) practice code.
 
 import EoZ
+import os
+import time
 
 EoZ.EoZ_Logo()
 
+# Global variables
 DATABASE = []
+DATABASENAME = ""
+DATE = time.strftime("%Y %b %d")
 
 
+# Initialize System ============================================
+if not os.path.exists("logs"): # if the logs folder doesn't exist make it
+    os.mkdir("Logs")
+
+
+
+# Functions ====================================================
 def menu():
     print("Welcome to the database!")
     print("Commands: ")
@@ -23,11 +37,20 @@ def menu():
 
 
 def load():  # load from a .pydb file
+    global DATABASENAME
+    global DATABASE
     file_name = input("What is the filename of the database?: ")
+    DATABASENAME = file_name
     pass
 
 
 def save():
+    global DATABASENAME
+    if DATABASENAME == "":
+        DATABASENAME = input("Please enter database name:")
+
+    # Proceed to exporting the data files
+
     pass
 
 
@@ -54,6 +77,7 @@ def edit():
     print("What do you want to edit? | [name] [id] [label] [age] [site]")
     pass
 
+
 # Searching Functions ===================================================================
 def search(database_array):
     print("You can search via: [name] [id] [label] [age] [site]")
@@ -61,7 +85,7 @@ def search(database_array):
     while switch == 1:
         user_input = input("Search which field?: ")
         if user_input == "name":
-            search_Name(database_array)
+            searchName(database_array)
             switch = 0
         if user_input == "id":
             pass
@@ -72,14 +96,37 @@ def search(database_array):
         if user_input == "site":
             pass
 
-def search_Name(database_array):
-    user_input = input("What name are we searching for?: ").lower().strip()
+
+def searchName(database_array):
+    # I would like to change this function to search for strings of 3 - 5 character matching in sequential order
+    user_input = input("What name are you searching for?: ").lower().strip()
     number = 0
-    for name in database_array: # what this does is check each name in each inner array
-        if name[0] == user_input: # 0=name index, so for every index[0] in the indexes inside the main index
-            user_name = str(name)
+    for entry in database_array:  # what this does is check each name in each inner array
+        if entry[0] == user_input:  # 0=name index, so for every index[0] in the indexes inside the main index
+            user_name = str(entry)  # Make an instance of the object as a string
             print("Result #" + str(number) + ": " + user_name)
             number += 1
+
+
+def searchID(database_array):
+    user_input = input("What ID are you searching for?: ").lower().strip()
+    number = 0
+    for entry in database_array:
+        if entry[1] == user_input:
+            user_id = str(entry)
+            print("Result #" + str(number) + ": " + user_id)
+            number += 1
+
+
+def searchLabel(database_array):
+    user_input = input("What label are you searching for?: ").lower().strip()
+    number = 0
+    for entry in database_array:
+        if entry[2] == user_input:
+            user_label = str(entry)
+            print("Result #" + str(number) + ": " + user_label)
+            number += 1
+
 
 # ==========================================================================================
 
@@ -89,7 +136,7 @@ def addEntry(database_array):  # Create an empty entry
 
 
 def add(database_array):  # Create a new entry
-    #global DATABASE
+    # global DATABASE
 
     name = str(input("Please input name: "))
     id = str(input("Please input id: "))
@@ -101,23 +148,27 @@ def add(database_array):  # Create a new entry
     # DATABASE.append(array)
     database_array.append(array)
 
+def getDate(): # Simply prints the date that was set at the beginning of the code
+    global DATE
+    print(DATE)
+
 
 def main():
     # Creating variables
     global DATABASE
     DATABASE = [[0 for x in range(5)] for x in range(5)]  # creates a 2 dimensional array
 
-    #print("gonna display the database!")
+    # print("gonna display the database!")
     display(DATABASE)
-    #print("Displayed it!")
+    # print("Displayed it!")
 
     # Imagine we wanted [0] = name [1] = ID [2] = Label [3] = Age and [4] = site
 
     print()
 
-    #print("Gonna print menu!")
+    # print("Gonna print menu!")
     menu()
-    #print("printed it!")
+    # print("printed it!")
 
     # User commands, each input should be a function.
     switch = 1
@@ -137,6 +188,8 @@ def main():
             search(DATABASE)
         elif user_input == "edit":
             edit()
+        elif user_input == "date":
+            getDate()
         elif user_input == "quit":
             switch = 0
 
