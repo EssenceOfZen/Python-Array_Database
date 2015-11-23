@@ -130,12 +130,10 @@ def searchLabel(database_array):
 
 # ==========================================================================================
 
-def addEntry(database_array):  # Create an empty entry
-    new_entry = [0, 0, 0, 0, 0]
-    database_array.append(new_entry)
 
+# Adding Function =========================================================================
 
-def add(database_array):  # Create a new entry
+def addEntry(database_array):  # Create a new entry
     # global DATABASE
 
     name = str(input("Please input name: "))
@@ -148,6 +146,7 @@ def add(database_array):  # Create a new entry
     # DATABASE.append(array)
     database_array.append(array)
 
+# ==========================================================================================
 def getDate(): # Simply prints the date that was set at the beginning of the code
     global DATE
     print(DATE)
